@@ -1,13 +1,14 @@
 # Skills do Claude para processos e melhoria contínua
 
-Duas skills para o [Claude](https://claude.ai) que ajudam a **mapear, analisar, automatizar e melhorar processos** com método: BPM, Lean e as ferramentas da qualidade. Escritas em português do Brasil, com foco em quem trabalha com processos no dia a dia: analistas, pontos focais de qualidade, supervisores e estudantes de Engenharia de Produção.
+Três skills para o [Claude](https://claude.ai) que ajudam a **mapear, analisar, automatizar, melhorar e organizar o trabalho** com método: BPM, Lean, as ferramentas da qualidade, Scrum e Kanban. Escritas em português do Brasil, com foco em quem trabalha com processos no dia a dia: analistas, pontos focais de qualidade, supervisores e estudantes de Engenharia de Produção.
 
 | Skill | Para que serve |
 |---|---|
 | [`mapeamento-automacao-processos`](skills/mapeamento-automacao-processos/SKILL.md) | Mapear um processo (escopo, SIPOC, BPMN), achar gargalos e desperdícios, desenhar o TO-BE e decidir o que automatizar. Gera o diagrama em arquivo `.bpmn`. |
 | [`ferramentas-qualidade-melhoria-continua`](skills/ferramentas-qualidade-melhoria-continua/SKILL.md) | Investigar por que um indicador piorou e montar o plano de ação: PDCA, MASP, A3, DMAIC, Pareto, Ishikawa, 5 Porquês, carta de controle, FMEA, 5W2H e 5S. |
+| [`scrum-kanban-gestao-trabalho`](skills/scrum-kanban-gestao-trabalho/SKILL.md) | Escolher entre Scrum, Kanban ou os dois juntos e montar a estrutura: Sprint, eventos, Definição de Pronto, Meta da Sprint, quadro com limite de WIP, SLE e métricas de fluxo. |
 
-Juntas, elas cobrem o ciclo completo: **mapear → achar a causa → melhorar → padronizar → medir de novo**.
+Juntas, elas cobrem o ciclo completo: **mapear → achar a causa → melhorar → padronizar → medir de novo**, e a terceira organiza como o trabalho flui e é entregue.
 
 ![Diagrama BPMN gerado pela skill: processo de compras de uma pequena indústria, com os gargalos marcados em vermelho](exemplos/compras-industria/compras-as-is.png)
 
@@ -30,8 +31,9 @@ Sem a skill, o Claude já sabe o que é um Pareto ou um BPMN. A skill acrescenta
 1. Baixe os ZIPs da pasta [`dist/`](dist/):
    - [`mapeamento-automacao-processos.zip`](dist/mapeamento-automacao-processos.zip)
    - [`ferramentas-qualidade-melhoria-continua.zip`](dist/ferramentas-qualidade-melhoria-continua.zip)
+   - [`scrum-kanban-gestao-trabalho.zip`](dist/scrum-kanban-gestao-trabalho.zip)
 2. No Claude, abra **Customize > Skills**, clique em **+** e escolha **Upload a skill**.
-3. Envie um ZIP de cada vez e confira se as duas aparecem ligadas.
+3. Envie um ZIP de cada vez e confira se as skills aparecem ligadas.
 
 O uso de skills depende do plano e das configurações da sua conta. Se a opção não aparecer, veja a [central de ajuda do Claude](https://support.claude.com).
 
@@ -67,6 +69,15 @@ Mapeia como o processo funciona hoje, acha as causas e propõe a melhoria com um
 Monte um FMEA para o processo de expedição.
 ```
 
+```text
+Monta um quadro Kanban para o meu time de atendimento por chat, com limite de WIP e SLE.
+```
+
+```text
+Quero adotar Scrum no meu time de 5 pessoas, com Sprint de 2 semanas.
+Monta o calendário dos eventos, a Definição de Pronto e um modelo de Meta da Sprint.
+```
+
 Quanto mais contexto e dados você der (exportação de sistema, planilha, números atuais e meta), mais concreta fica a resposta. Sem dados, a skill entrega o roteiro de investigação e diz exatamente o que coletar.
 
 Para abrir os arquivos `.bpmn`, use o [demo.bpmn.io](https://demo.bpmn.io) (no navegador, sem instalar) ou o [Camunda Modeler](https://camunda.com/download/modeler/) (gratuito).
@@ -100,7 +111,9 @@ Cada teste rodou num **chat novo, sem citar o nome da skill**, para checar se el
 | Queda do CSAT | Ferramentas | Confirmou a queda antes de buscar causa; hipóteses, Pareto, Ishikawa e 5W2H |
 | FMEA da abertura de chamados | Ferramentas | Escalas ajustáveis, convenção declarada, gravidade alta sobe a prioridade |
 | Refugo numa fábrica de embalagens | Ferramentas | MASP, estratificação e hipóteses no chão de fábrica, sem números inventados |
-| Reabertura de chamados | As duas juntas | Uma rodada só de perguntas; mapa → causas → PDCA → plano de controle |
+| Reabertura de chamados | As duas primeiras juntas | Uma rodada só de perguntas; mapa → causas → PDCA → plano de controle |
+| Quadro Kanban para atendimento por chat | Scrum e Kanban | Disparou sozinha; WIP por coluna, SLE por classe de serviço e premissas declaradas, com os números tratados como ponto de partida |
+| Scrum para um time de 5 pessoas, Sprint de 2 semanas | Scrum e Kanban | Disparou sozinha; eventos dentro dos limites do Scrum Guide, Definição de Pronto e modelo de Meta da Sprint |
 
 O histórico de ajustes está no [CHANGELOG](CHANGELOG.md).
 
@@ -109,6 +122,7 @@ O histórico de ajustes está no [CHANGELOG](CHANGELOG.md).
 - **Não substituem normas nem especialistas.** Em áreas reguladas (saúde, alimentos, segurança do trabalho, ISO específica), a skill dá o método, não o requisito.
 - **Estatística avançada é rasa.** Cartas por atributo ou subgrupo, capacidade (Cpk), DOE e regressão aparecem em alto nível; a skill avisa quando chega nesse limite.
 - **Resolvem um problema por vez.** Não acompanham uma carteira de projetos de melhoria ao longo do tempo.
+- **Scrum e Kanban cobrem o essencial dos guias oficiais.** Escalonamento de vários times, certificações e ferramentas específicas (Jira, Azure DevOps) ficam fora; em dúvida sobre uma regra, confirme no guia vigente.
 - **A qualidade depende dos dados.** Sem números reais, o resultado é um roteiro de investigação, não um diagnóstico.
 
 ## Referências
@@ -120,6 +134,9 @@ As skills são um resumo próprio de práticas consolidadas de gestão de proces
 - Falconi, V. *Gerenciamento da Rotina do Trabalho do Dia a Dia* e *TQC: Controle da Qualidade Total*.
 - Imai, M. *Gemba Kaizen*.
 - Pande, P.; Neuman, R.; Cavanagh, R. *The Six Sigma Way*.
+- Schwaber, K.; Sutherland, J. *The Scrum Guide* (2020), em [scrumguides.org](https://scrumguides.org/scrum-guide).
+- Coleman, J. et al. *The Kanban Guide* (maio de 2025), em [kanbanguides.org](https://kanbanguides.org/the-kanban-guide/2025.5/).
+- Scrum.org; Vacanti, D.; Yeret, Y. *The Kanban Guide for Scrum Teams* (2021), em [scrum.org](https://www.scrum.org/resources/kanban-guide-scrum-teams).
 
 ## Contribuir
 
